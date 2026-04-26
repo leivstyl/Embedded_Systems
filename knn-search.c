@@ -123,8 +123,8 @@ int main() {
     double *knn_dist = (double *)malloc(m * k * sizeof(double));
 
     // Αρχικοποίηση δεδομένων (εδώ θα έμπαινε το διάβασμα από αρχείο)
-   // for(int i=0; i<n*d; i++) C[i] = (double)rand()/RAND_MAX;
-   // for(int i=0; i<m*d; i++) Q[i] = (double)rand()/RAND_MAX;
+    for(int i=0; i<n*d; i++) C[i] = (double)rand()/RAND_MAX;
+    for(int i=0; i<m*d; i++) Q[i] = (double)rand()/RAND_MAX;
    
    // --- ΝΕΟ INITIALIZATION ΓΙΑ TEST ---
     // 1. Γέμισε τα πάντα με μια μεγάλη τιμή (π.χ. 100.0)
@@ -152,21 +152,7 @@ int main() {
     }
 
     for (int i = 0; i < num_threads; i++) pthread_join(threads[i], NULL);
-    // --- ΑΝΑΛΥΤΙΚΑ ΑΠΟΤΕΛΕΣΜΑΤΑ ---
-    printf("\n=== SANITY TEST RESULTS ===\n");
-    printf("Query 0 (planted at 0.1) should find Point 0 (planted at 0.0)\n");
-    
-    for (int i = 0; i < k; i++) {
-        printf("Neighbor %d: Index = %d, Distance = %f\n", 
-                i, knn_idx[0 * k + i], knn_dist[0 * k + i]);
-    }
-
-    if (knn_idx[0] == 0) {
-        printf("\n[SUCCESS]: Query 0 found Point 0!\n");
-    } else {
-        printf("\n[FAILURE]: Query 0 found Index %d. Check your distance logic.\n", knn_idx[0]);
-    }
-    // ------------------------------
+  
 
     printf("Done! First query's nearest neighbor: index %d, distance %f\n", knn_idx[0], knn_dist[0]);
 
